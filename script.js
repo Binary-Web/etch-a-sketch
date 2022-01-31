@@ -1,5 +1,9 @@
 const gridContainer = document.querySelector('.grid-container');
 const gridLineToggle = document.querySelector('.grid-lines-toggle');
+const penControl = document.querySelector('.pen');
+const eraserControl = document.querySelector('.eraser');
+const rainbowControl = document.querySelector('.rainbow');
+const controls = document.querySelectorAll(".control")
 
 setUpGrid();
 gridLines();
@@ -41,6 +45,38 @@ function gridLines() {
         
     }
 }
+console.log(penControl);
+
+//CONTROLS - PEN - ERASER - RAINBOW
+//ALL THREE CONTROLS ONLY WILL BE ENABLED OTHERS WILL BE DISABLED
+let penColor = "#000000";
+let rainbowActive = false
+penControl.addEventListener('click', () => {
+    penColor = "#000000"
+    penControl.classList.remove('disable')
+    eraserControl.classList.add('disable');
+    rainbowControl.classList.add('disable');
+    rainbowActive = false
+})
+
+eraserControl.addEventListener('click', () => {
+    penColor = "#ffffff"
+    penControl.classList.add('disable')
+    eraserControl.classList.remove('disable');
+    rainbowControl.classList.add('disable');
+    rainbowActive = false
+})
+
+
+rainbowControl.addEventListener('click', () => {
+    rainbowActive = true;
+    penControl.classList.add('disable')
+    eraserControl.classList.add('disable');
+    rainbowControl.classList.remove('disable');
+});
+
+//RAINBOW PEN FUNCTION
+
 
 //SKETCH
 function clickEvent() {
@@ -49,17 +85,43 @@ function clickEvent() {
     squares.forEach((square) => {
         square.addEventListener('mousemove', (e)=> {
             if(e.buttons === 1) {
-                //square.style.cssText = "background-color: #1;";
-                if(colorCode <= 360) {
-                    square.style.cssText = `background-color: hsl(${colorCode}, 100%, 50%)`;
-                    colorCode++;
-                } else {
-                    colorCode = 20;
-                }
+                    if(rainbowActive != true) {
+                        square.style.cssText = `background-color: ${penColor}`;
+                        
+                        console.log(square.style.cssText)
+                    } else {
+                        if(colorCode <= 360) {
+                            square.style.cssText = `background-color: hsl(${colorCode}, 100%, 50%)`;
+                            colorCode++;
+                        } else {
+                            colorCode = 20;
+                        }
+                    }
             }
         })
     });
 }
+
+
+// function getActiveControl() {
+//     controls.forEach(control => {
+//         switch(control.classList[1]) {
+//             case "rainbow": return "rainbow";
+//             break;
+//             case "eraser": return "eraser";
+//             break;
+//             case "pen": return "pen";
+//             break;
+//             case "rainbow": return "rainbow";
+//             break;
+//         }
+//     });
+// }
+
+
+
+//RAINBOW
+
 
 //slider function
 const gridRange = document.querySelector('.grid-range');
@@ -68,22 +130,12 @@ gridRange.addEventListener("input", () => {
 })
 
 
-//TOGGLES
 
-//PEN ERASER RAINBOW TOGGLE
-controls.forEach(control => {
-    control.classList.toggle('disable');
-    control.addEventListener('click', () => {
-        control.classList.toggle('active')
-    })
-})
 
 gridLineToggle.addEventListener('click', () => {
     gridLineToggle.classList.toggle("disable");
     gridLines()
 })
-
-
 
 
 
