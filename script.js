@@ -3,11 +3,13 @@ const gridLineToggle = document.querySelector('.grid-lines-toggle');
 const penControl = document.querySelector('.pen');
 const eraserControl = document.querySelector('.eraser');
 const rainbowControl = document.querySelector('.rainbow');
-const controls = document.querySelectorAll(".control")
+const controls = document.querySelectorAll(".control");
+const backgroundChanger = document.querySelector('.background-changer');
+
 
 setUpGrid();
 gridLines();
-
+setUpBackgroundColor();
 function setUpGrid(size = 25) {
     //REFRESH
     gridContainer.innerHTML = "";
@@ -23,6 +25,7 @@ function setUpGrid(size = 25) {
     rangeNum.innerHTML = `${size} <i class="fas fa-times"></i> ${size}`;
     clickEvent();
     gridLines();
+    setUpBackgroundColor();
 
 }
 
@@ -45,14 +48,20 @@ function gridLines() {
         
     }
 }
-console.log(penControl);
+
+function setUpBackgroundColor() {
+    gridContainer.style.backgroundColor = backgroundChanger.value;
+}
+backgroundChanger.addEventListener('input', setUpBackgroundColor)
 
 //CONTROLS - PEN - ERASER - RAINBOW
 //ALL THREE CONTROLS ONLY WILL BE ENABLED OTHERS WILL BE DISABLED
 let penColor = "#000000";
-let rainbowActive = false
+let rainbowActive = false;
+let eraserActive = false;
 penControl.addEventListener('click', () => {
-    penColor = "#000000"
+    penColor = "#000000";
+    eraserActive = false;
     penControl.classList.remove('disable')
     eraserControl.classList.add('disable');
     rainbowControl.classList.add('disable');
@@ -60,7 +69,7 @@ penControl.addEventListener('click', () => {
 })
 
 eraserControl.addEventListener('click', () => {
-    penColor = "#ffffff"
+    eraserActive = true;
     penControl.classList.add('disable')
     eraserControl.classList.remove('disable');
     rainbowControl.classList.add('disable');
@@ -70,6 +79,7 @@ eraserControl.addEventListener('click', () => {
 
 rainbowControl.addEventListener('click', () => {
     rainbowActive = true;
+    eraserActive = false;
     penControl.classList.add('disable')
     eraserControl.classList.add('disable');
     rainbowControl.classList.remove('disable');
@@ -85,18 +95,18 @@ function clickEvent() {
     squares.forEach((square) => {
         square.addEventListener('mousemove', (e)=> {
             if(e.buttons === 1) {
-                    if(rainbowActive != true) {
-                        square.style.cssText = `background-color: ${penColor}`;
-                        
-                        console.log(square.style.cssText)
+                if(eraserActive == true){
+                    square.style.backgroundColor = ""
+                } else if(rainbowActive == true) {
+                    if(colorCode <= 360) {
+                        square.style.cssText = `background-color: hsl(${colorCode}, 100%, 50%)`;
+                        colorCode++;
                     } else {
-                        if(colorCode <= 360) {
-                            square.style.cssText = `background-color: hsl(${colorCode}, 100%, 50%)`;
-                            colorCode++;
-                        } else {
-                            colorCode = 20;
-                        }
+                        colorCode = 20;
                     }
+                } else {
+                    square.style.cssText = `background-color: ${penColor}`
+                }
             }
         })
     });

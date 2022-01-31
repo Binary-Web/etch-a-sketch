@@ -15,7 +15,7 @@ body {
     height: 600px;
     display: grid;
 
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
 }
 
 
@@ -36,9 +36,12 @@ body {
 
 .toggle {
     color: #ffffff;
+    display: flex;
+    justify-content: center;
     text-align: center;
+    margin: 0.5rem;
     width: 200px;
-    padding: 1rem;
+    padding: 2rem 1rem;
     border: 1px solid #ffffff;
     cursor: pointer;
 }
