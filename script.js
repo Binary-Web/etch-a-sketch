@@ -1,9 +1,7 @@
 const gridContainer = document.querySelector('.grid-container');
-const gridLineToggle = document.querySelector('.grid-lines-toggle');
 const penControl = document.querySelector('.pen');
 const eraserControl = document.querySelector('.eraser');
 const rainbowControl = document.querySelector('.rainbow');
-const controls = document.querySelectorAll(".control");
 const backgroundChanger = document.querySelector('.background-changer');
 
 const gridLineSwitch = document.querySelector('input[type=checkbox]');
@@ -12,7 +10,7 @@ const gridLineSwitch = document.querySelector('input[type=checkbox]');
 setUpGrid();
 gridLines();
 setUpBackgroundColor();
-function setUpGrid(size = 25) {
+function setUpGrid(size = 35) {
     //REFRESH
     gridContainer.innerHTML = "";
     gridContainer.style.cssText = `grid-template-columns: repeat(${size}, 1fr); grid-template-rows: repeat(${size}, 1fr);`;
@@ -34,16 +32,13 @@ function setUpGrid(size = 25) {
 
 
 function gridLines() {
-    console.log(document.querySelector("input[type=checkbox]").checked)
     const squares = document.querySelectorAll('.square');
     if(gridLineSwitch.checked == false) {
-        console.log("disable")
         squares.forEach(element => {
             element.classList.add('grid-lines-disable');
             element.classList.remove("grid-lines-active")
         });
     } else {
-        console.log("active")
         squares.forEach(element => {
             element.classList.remove('grid-lines-disable');
             element.classList.add('grid-lines-active')
@@ -70,27 +65,27 @@ let eraserActive = false;
 penControl.addEventListener('click', () => {
     penColor = "#000000";
     eraserActive = false;
-    penControl.classList.remove('disable')
-    eraserControl.classList.add('disable');
-    rainbowControl.classList.add('disable');
     rainbowActive = false
+    penControl.classList.add('active');
+    eraserControl.classList.remove('active');
+    rainbowControl.classList.remove('active');
 })
 
 eraserControl.addEventListener('click', () => {
     eraserActive = true;
-    penControl.classList.add('disable')
-    eraserControl.classList.remove('disable');
-    rainbowControl.classList.add('disable');
-    rainbowActive = false
+    rainbowActive = false;
+    penControl.classList.remove('active');
+    eraserControl.classList.add('active');
+    rainbowControl.classList.remove('active');
 })
 
 
 rainbowControl.addEventListener('click', () => {
     rainbowActive = true;
     eraserActive = false;
-    penControl.classList.add('disable')
-    eraserControl.classList.add('disable');
-    rainbowControl.classList.remove('disable');
+    penControl.classList.remove('active');
+    eraserControl.classList.remove('active');
+    rainbowControl.classList.add('active');
 });
 
 //RAINBOW PEN FUNCTION

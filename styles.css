@@ -9,6 +9,9 @@ body {
     margin: auto;
     justify-content: center;
     background-color: #808c94;
+    font-family: 'JetBrains Mono', monospace;
+
+    font-family: 'Roboto', sans-serif;
 }
 
 
@@ -16,8 +19,6 @@ body {
 
 .main-container {
     height: 100%;
-    justify-content: center;
-    border: 1px solid black;
     display: grid;
     grid-template-columns: 15rem 2fr;
     grid-template-rows: auto;
@@ -31,6 +32,7 @@ body {
 .title {
     grid-area: head;
     text-align: center;
+    margin: 3rem;
     
 }
 
@@ -48,27 +50,30 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     grid-area: side;
 }
 
-
 .toggle {
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin: 0.5rem;
-    width: 200px;
-    padding: 2rem 1rem;
-    border: 1px solid #ffffff;
     cursor: pointer;
+    padding: 1rem 3rem;
+    width: 12rem;
+    background-color: #43a5f5;
+    margin: 0.5rem;
+    border-radius: 2rem;
+    text-align: center;
+    color: #000000;
 }
 
-.disable {
-background-color: #ffffff;
-color: #000000;
+
+.active {
+    border: 2px solid #08477a;
+
+    -webkit-box-shadow:inset 0px 0px 0px 1px #08477a;
+    -moz-box-shadow:inset 0px 0px 0px 1px #08477a;
+    box-shadow:inset 0px 0px 0px 1x #08477a;
 }
+
 
 
 .grid-lines-active {
@@ -140,9 +145,47 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-.grid-lines-toggle {
+.grid-lines-toggle, .background-container {
     display: flex;
     justify-content: center;
     align-items: center;
     grid-gap: 1rem;
+}
+
+
+/* THIS IS THE GRID RANGE SLIDER */
+.range-slider {
+    width: 12rem;
+}
+  
+.grid-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    border-radius: 0.5rem;
+    transition: opacity .2s;
+}
+
+.grid-range:hover {
+    opacity: 1;
+}
+  
+.grid-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #2196F3;
+    cursor: pointer;
+}
+  
+.grid-range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #2196F3;
+    cursor: pointer;
 }
