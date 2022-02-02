@@ -20,7 +20,7 @@ body {
 .main-container {
     height: 100%;
     display: grid;
-    grid-template-columns: 15rem 2fr;
+    grid-template-columns: 14rem 2fr;
     grid-template-rows: auto;
     grid-template-areas: 
         "head head"
@@ -156,6 +156,7 @@ input:checked + .slider:before {
 /* THIS IS THE GRID RANGE SLIDER */
 .range-slider {
     width: 12rem;
+    text-align: center;
 }
   
 .grid-range {
