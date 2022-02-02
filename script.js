@@ -6,6 +6,8 @@ const rainbowControl = document.querySelector('.rainbow');
 const controls = document.querySelectorAll(".control");
 const backgroundChanger = document.querySelector('.background-changer');
 
+const gridLineSwitch = document.querySelector('input[type=checkbox]');
+
 
 setUpGrid();
 gridLines();
@@ -29,11 +31,12 @@ function setUpGrid(size = 25) {
 
 }
 
+
+
 function gridLines() {
+    console.log(document.querySelector("input[type=checkbox]").checked)
     const squares = document.querySelectorAll('.square');
-    const gridLineToggleClasses = gridLineToggle.classList;
-    console.log(gridLineToggleClasses)
-    if(gridLineToggle.classList[2] == "disable") {
+    if(gridLineSwitch.checked == false) {
         console.log("disable")
         squares.forEach(element => {
             element.classList.add('grid-lines-disable');
@@ -48,6 +51,11 @@ function gridLines() {
         
     }
 }
+
+gridLineSwitch.addEventListener('change', gridLines)
+
+
+
 
 function setUpBackgroundColor() {
     gridContainer.style.backgroundColor = backgroundChanger.value;
@@ -113,24 +121,6 @@ function clickEvent() {
 }
 
 
-// function getActiveControl() {
-//     controls.forEach(control => {
-//         switch(control.classList[1]) {
-//             case "rainbow": return "rainbow";
-//             break;
-//             case "eraser": return "eraser";
-//             break;
-//             case "pen": return "pen";
-//             break;
-//             case "rainbow": return "rainbow";
-//             break;
-//         }
-//     });
-// }
-
-
-
-//RAINBOW
 
 
 //slider function
@@ -138,14 +128,4 @@ const gridRange = document.querySelector('.grid-range');
 gridRange.addEventListener("input", () => {
     setUpGrid(gridRange.value);
 })
-
-
-
-
-gridLineToggle.addEventListener('click', () => {
-    gridLineToggle.classList.toggle("disable");
-    gridLines()
-})
-
-
 
