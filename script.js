@@ -124,3 +124,6 @@ gridRange.addEventListener("input", () => {
     setUpGrid(gridRange.value);
 })
 
+document.querySelector('.reset-button').addEventListener('click', () => {
+    setUpGrid(gridRange.value);
+})
