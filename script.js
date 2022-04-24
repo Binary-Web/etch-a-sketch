@@ -2,7 +2,9 @@ const gridContainer = document.querySelector('.grid-container');
 const penControl = document.querySelector('.pen');
 const eraserControl = document.querySelector('.eraser');
 const rainbowControl = document.querySelector('.rainbow');
+
 const backgroundChanger = document.querySelector('.background-changer');
+const penColorChanger = document.querySelector('.pen-color-changer');
 
 const gridLineSwitch = document.querySelector('input[type=checkbox]');
 
@@ -47,7 +49,8 @@ function gridLines() {
     }
 }
 
-gridLineSwitch.addEventListener('change', gridLines)
+gridLineSwitch.addEventListener('change', gridLines);
+penColorChanger.addEventListener('input', penActivate);
 
 
 
@@ -55,21 +58,23 @@ gridLineSwitch.addEventListener('change', gridLines)
 function setUpBackgroundColor() {
     gridContainer.style.backgroundColor = backgroundChanger.value;
 }
-backgroundChanger.addEventListener('input', setUpBackgroundColor)
+backgroundChanger.addEventListener('input', setUpBackgroundColor);
 
 //CONTROLS - PEN - ERASER - RAINBOW
 //ALL THREE CONTROLS ONLY WILL BE ENABLED OTHERS WILL BE DISABLED
-let penColor = "#000000";
+let penColor = penColorChanger.value;
 let rainbowActive = false;
 let eraserActive = false;
-penControl.addEventListener('click', () => {
-    penColor = "#000000";
+penControl.addEventListener('click', penActivate);
+
+function penActivate() {
+    penColor = penColorChanger.value;
     eraserActive = false;
     rainbowActive = false
     penControl.classList.add('active');
     eraserControl.classList.remove('active');
     rainbowControl.classList.remove('active');
-})
+}
 
 eraserControl.addEventListener('click', () => {
     eraserActive = true;
