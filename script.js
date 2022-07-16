@@ -61,7 +61,7 @@ function setUpBackgroundColor() {
 backgroundChanger.addEventListener('input', setUpBackgroundColor);
 
 //CONTROLS - PEN - ERASER - RAINBOW
-//ALL THREE CONTROLS ONLY WILL BE ENABLED OTHERS WILL BE DISABLED
+//one will be enabled others will be disabled
 let penColor = penColorChanger.value;
 let rainbowActive = false;
 let eraserActive = false;
